@@ -39,7 +39,7 @@ THIS IS ONE EXAMPLE, WHERE THE EMAIL IS NOT ACCEPTED BECAUSE IT DOES NOT COMPLY 
 
 ### BLOB INSERT
 
-In ouer case we used the following string to insert the images as bytea data in the designed column, we stored images of each plane.
+In ouer case we used the following string to insert the images as bytea data in the designed column. We stored images of each plane.
 
 ~~~
 pg_read_binary_file('C:\Program Files\PostgreSQL\13\pgAdmin 4\plain_images\nostrum.png')::bytea)
@@ -48,7 +48,7 @@ This seemed easier and faster than using python.
 
 ### RETRIEVING THE IMAGES
 
-To display the images we used python to convert the binary dta to a file and store it in a variable , we connected to the databasa by using psycopg2 tehn, we transformed the data and stored it by using PILLOW
+To display the images we used python to convert the binary dta to a file and store it in a variable , we connected to the databasa by using psycopg2 then, we transformed the data and stored it by using PILLOW
 ~~~
 from tkinter import Image
 import psycopg2
@@ -74,7 +74,7 @@ By using the PIL librarie, the code seems easier to understand and use.
 
 ## INDEXES AND CASCADIAN ACTIONS
 
-These where added in the main script since they help manage the data, the cascadiana ction was used mostly in the foreign and primary key conection.
+These where added in the main script, since they help manage the data, the cascadiana action was used mostly in the foreign and primary key conection.
 ~~~
 CREATE INDEX passengers_last_name_idx ON passengers (last_name);
 CREATE INDEX flight_departure_time_idx ON flight (departure_time);
@@ -120,7 +120,7 @@ GRANT dispatcher TO persona5;
 
 ## CONCLUSION 
 
-To sum up its a small example of an airline database, which we used to practice the different sections of the unit and understand how they work. We also used previows knowledge since we had to use many-to-many and one-to-many relationships. Also we used postgres to get used to it, also it was very helpfull due to its large documentation and compatibility.
+To sum up, emphasize that it is  a small example of an airline database, which we used to practice the different sections of the unit and understand how they work. We also used previows knowledge since we had to use many-to-many and one-to-many relationships. Also we used postgres to get used to it, also it was very helpfull due to it's large documentation and compatibility.
 
 ### By
 
