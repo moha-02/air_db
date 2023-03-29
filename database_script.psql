@@ -1,0 +1,162 @@
+
+BEGIN;
+CREATE DATABASE air_db;
+
+
+CREATE TABLE IF NOT EXISTS public.booking
+(
+    booking_id integer NOT NULL,
+    flight_id integer NOT NULL,
+    price_id integer NOT NULL,
+    CONSTRAINT booking_pkey PRIMARY KEY (booking_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.booking_passenger
+(
+    booking_id integer NOT NULL,
+    passenger_id integer NOT NULL,
+    CONSTRAINT booking_passenger_pkey PRIMARY KEY (booking_id, passenger_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.destinations
+(
+    destination_id integer NOT NULL,
+    destination_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT destinations_pkey PRIMARY KEY (destination_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.flight
+(
+    flight_number integer NOT NULL,
+    departure_time timestamp without time zone NOT NULL,
+    arrival_time timestamp without time zone NOT NULL,
+    gate gate NOT NULL,
+    destination_id integer,
+    flight_status_id integer,
+    planes_id character varying(10) COLLATE pg_catalog."default",
+    CONSTRAINT flight_pkey PRIMARY KEY (flight_number)
+);
+
+CREATE TABLE IF NOT EXISTS public.flight_status
+(
+    flight_status_id integer NOT NULL,
+    status character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT flight_status_pkey PRIMARY KEY (flight_status_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.functions
+(
+    function_id integer NOT NULL,
+    function_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT functions_pkey PRIMARY KEY (function_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.passengers
+(
+    sequence_number integer NOT NULL,
+    first_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    last_name character varying(255) COLLATE pg_catalog."default" NOT NULL,
+    date_of_birth date NOT NULL,
+    passport_number character varying(20) COLLATE pg_catalog."default" NOT NULL,
+    nationality nationality COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT passengers_pkey PRIMARY KEY (sequence_number)
+);
+
+CREATE TABLE IF NOT EXISTS public.personal
+(
+    personal_id integer NOT NULL,
+    function_id integer,
+    name character varying(255) COLLATE pg_catalog."default",
+    surname character varying(255) COLLATE pg_catalog."default",
+    birthday date,
+    sex character varying(255) COLLATE pg_catalog."default",
+    email email COLLATE pg_catalog."default" NOT NULL,
+    phone_number phone_number COLLATE pg_catalog."default" NOT NULL,
+    salary numeric(10, 2),
+    username character varying(255) COLLATE pg_catalog."default",
+    password character varying(255) COLLATE pg_catalog."default",
+    CONSTRAINT personal_pkey PRIMARY KEY (personal_id)
+);
+
+CREATE TABLE IF NOT EXISTS public.planes
+(
+    matricula matricula COLLATE pg_catalog."default" NOT NULL,
+    modelo character varying(255) COLLATE pg_catalog."default",
+    capacidad capacity NOT NULL,
+    plain_image bytea,
+    CONSTRAINT planes_pkey PRIMARY KEY (matricula)
+);
+
+CREATE TABLE IF NOT EXISTS public.tripulation
+(
+    tripulation_id integer NOT NULL,
+    name character varying(255) COLLATE pg_catalog."default",
+    surname character varying(255) COLLATE pg_catalog."default",
+    function_id integer,
+    flight_id integer,
+    CONSTRAINT tripulation_pkey PRIMARY KEY (tripulation_id)
+);
+
+ALTER TABLE IF EXISTS public.booking
+    ADD CONSTRAINT booking_flight_id_fkey FOREIGN KEY (flight_id)
+    REFERENCES public.flight (flight_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.booking_passenger
+    ADD CONSTRAINT booking_passenger_booking_id_fkey FOREIGN KEY (booking_id)
+    REFERENCES public.booking (booking_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.booking_passenger
+    ADD CONSTRAINT booking_passenger_passenger_id_fkey FOREIGN KEY (passenger_id)
+    REFERENCES public.passengers (sequence_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.flight
+    ADD CONSTRAINT flight_destination_id_fkey FOREIGN KEY (destination_id)
+    REFERENCES public.destinations (destination_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.flight
+    ADD CONSTRAINT flight_flight_status_id_fkey FOREIGN KEY (flight_status_id)
+    REFERENCES public.flight_status (flight_status_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.flight
+    ADD CONSTRAINT flight_planes_id_fkey FOREIGN KEY (planes_id)
+    REFERENCES public.planes (matricula) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.personal
+    ADD CONSTRAINT personal_function_id_fkey FOREIGN KEY (function_id)
+    REFERENCES public.functions (function_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+
+ALTER TABLE IF EXISTS public.tripulation
+    ADD CONSTRAINT tripulation_flight_id_fkey FOREIGN KEY (flight_id)
+    REFERENCES public.flight (flight_number) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE NO ACTION;
+
+
+ALTER TABLE IF EXISTS public.tripulation
+    ADD CONSTRAINT tripulation_function_id_fkey FOREIGN KEY (function_id)
+    REFERENCES public.functions (function_id) MATCH SIMPLE
+    ON UPDATE NO ACTION
+    ON DELETE CASCADE;
+
+END;

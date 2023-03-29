@@ -1,0 +1,29 @@
+CREATE DOMAIN email AS TEXT
+CHECK (VALUE ~* 
+'^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$');
+
+CREATE DOMAIN phone_number AS text CHECK (VALUE ~ '^(\+34|0034)?[6789]\d{8}$');
+
+Create Domain  capacity As  INTEGER
+check (Value >= 150 and value <=190);
+
+
+CREATE DOMAIN matricula AS text CHECK (VALUE ~* '^[A-Z]{2,}-[A-Z]{3,}$');
+
+Create domain  gate  as integer
+check (VALUE > 0 and value < 100);
+
+
+CREATE DOMAIN nationality AS VARCHAR(255)
+  CHECK (VALUE IN 
+   ('Argentina', 'Bolivia', 'Brasil', 'Chile', 'Colombia', 'Costa Rica', 'Cuba', 
+    'Ecuador', 'El Salvador', 'Guatemala', 'Honduras', 'México', 'Nicaragua',
+    'Panamá', 'Paraguay', 'Perú', 'Puerto Rico', 'República Dominicana', 'Uruguay', 'Venezuela',
+    'España', 'Francia', 'Reino Unido', 'Alemania', 'Italia', 'Holanda', 'Rusia',
+    'Canadá', 'Estados Unidos', 'China', 'Japón', 'Corea del Sur', 'India', 'Australia', 'Nueva Zelanda',
+    'Sudáfrica', 'Nigeria', 'Egipto', 'Marruecos', 'Ghana', 'Kenia', 'Tanzania', 'Uganda',
+    'Turquía', 'Irán', 'Israel', 'Arabia Saudita', 'Emiratos Árabes Unidos', 'Qatar', 'Kuwait', 'Bahréin')
+);
+
+create domain function_name as varchar (20)
+check (VALUE in (‘co-pilot’,’commandant’,’stewardess’,’passenger_agent’,’administrative_technician’,’dispatcher’,’operation_technician’));

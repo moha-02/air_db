@@ -1,0 +1,26 @@
+CREATE USER persona1 WITH PASSWORD 'password1';
+CREATE USER persona2 WITH PASSWORD 'password2';
+CREATE USER persona3 WITH PASSWORD 'password3';
+CREATE USER persona4 WITH PASSWORD 'password4';
+CREATE USER persona5 WITH PASSWORD 'password5';
+
+CREATE ROLE  pax; 
+GRANT SELECT ON flight TO pax;
+GRANT pax TO persona1;
+
+CREATE ROLE  passenger_agent; 
+GRANT  SELECT,insert,update ON passengerS TO passenger_agent; 
+GRANT passenger_agent TO persona2;
+
+CREATE ROLE  operation_technician;
+GRANT  SELECT,insert,update ON flight TO operation_technician;
+GRANT operation_technician TO persona3;
+
+CREATE ROLE administrative_technician;
+GRANT  ALL PRIVILEGES ON flight,passengers,personal TO administrative_technician; 
+GRANT administrative_technician TO persona4;
+
+CREATE ROLE  dispatcher;
+GRANT SELECT,update ON flight TO dispatcher;
+GRANT dispatcher TO persona5;
+

@@ -1,0 +1,141 @@
+INSERT INTO public.planes(
+	matricula, modelo, capacidad, plain_image)
+	VALUES ('EH-RGY', 'nostrum', '150', pg_read_binary_file('C:\Program Files\PostgreSQL\13\pgAdmin 4\plain_images\nostrum.png')::bytea);
+
+INSERT INTO public.planes(
+	matricula, modelo, capacidad, plain_image)
+	VALUES ('EH-FTP', 'airbus', '190', pg_read_binary_file('C:\Program Files\PostgreSQL\13\pgAdmin 4\plain_images\airbus.png')::bytea);
+
+INSERT INTO public.planes(
+	matricula, modelo, capacidad, plain_image)
+	VALUES ('EH-KML', 'liberty', '170', pg_read_binary_file('C:\Program Files\PostgreSQL\13\pgAdmin 4\plain_images\liberty.png')::bytea);
+
+
+
+INSERT INTO public.flight_status(
+	flight_status_id, status)
+	VALUES (1, 'ready');
+
+INSERT INTO public.flight_status(
+	flight_status_id, status)
+	VALUES (2, 'waiting');
+
+INSERT INTO public.flight_status(
+	flight_status_id, status)
+	VALUES (3, 'ready');
+
+
+
+INSERT INTO public.destinations(
+	destination_id, destination_name)
+	VALUES (1, 'Spain');
+
+INSERT INTO public.destinations(
+	destination_id, destination_name)
+	VALUES (2, 'Morroco');
+
+INSERT INTO public.destinations(
+	destination_id, destination_name)
+	VALUES (3, 'Portugal');
+
+
+
+INSERT INTO public.flight(
+	flight_number, departure_time, arrival_time, gate, destination_id, flight_status_id, planes_id)
+	VALUES (1, '2023-03-12 09:10:15',  '2023-03-12 10:10:15', 1, 1, 1, 'EH-RGY');
+
+INSERT INTO public.flight(
+	flight_number, departure_time, arrival_time, gate, destination_id, flight_status_id, planes_id)
+	VALUES (1, '2023-03-12 09:10:15',  '2023-03-12 10:10:15', 2, 2, 2, 'EH-FTP');
+
+INSERT INTO public.flight(
+	flight_number, departure_time, arrival_time, gate, destination_id, flight_status_id, planes_id)
+	VALUES (1, '2023-03-12 09:10:15',  '2023-03-12 10:10:15', 3, 3, 3, 'EH-KML');
+
+
+
+INSERT INTO public.personal(
+	personal_id, function_id, name, surname, birthday, sex, email, phone_number, salary, username, password)
+	VALUES (1, 1,'moha', 'salhi', '21-07-2002', 'male', 'mohasalhi@gmail.com', 631662698, 20000, 'simo', 'password1');
+
+INSERT INTO public.personal(
+	personal_id, function_id, name, surname, birthday, sex, email, phone_number, salary, username, password)
+	VALUES (2, 2,'juan', 'gonzalez', '21-07-1999', 'male', 'gonzalez@gmail.com', 623456789, 20000, 'gon', 'password2');
+
+INSERT INTO public.personal(
+	personal_id, function_id, name, surname, birthday, sex, email, phone_number, salary, username, password)
+	VALUES (3, 4,'andres', 'wilson', '21-07-2000', 'male', 'andres@gmail.com', 623456788, 20000, 'wil', 'password3');
+
+
+
+
+
+
+
+INSERT INTO public.functions(
+	function_id, function_name)
+	VALUES (1, 'co-pilot');
+
+INSERT INTO public.functions(
+	function_id, function_name)
+	VALUES (2, 'co-pilot');
+
+INSERT INTO public.functions(
+	function_id, function_name)
+	VALUES (3, 'co-pilot');
+
+
+
+
+INSERT INTO public.tripulation(
+	tripulation_id, name, surname, function_id, flight_id)
+	VALUES (1, 'miqguel', 'lozano', '1', 1);
+
+INSERT INTO public.tripulation(
+	tripulation_id, name, surname, function_id, flight_id)
+	VALUES (2, 'james', 'rod', '2', 3);
+
+INSERT INTO public.tripulation(
+	tripulation_id, name, surname, function_id, flight_id)
+	VALUES (3, 'sergio', 'por', '3', 3);
+
+
+
+
+INSERT INTO public.passengers(
+	sequence_number, first_name, last_name, date_of_birth, passport_number, nationality)
+	VALUES (1, 'fabian', 'ossai', '2000-01-01', 'F04267', 'Venezuela');
+
+INSERT INTO public.passengers(
+	sequence_number, first_name, last_name, date_of_birth, passport_number, nationality)
+	VALUES (2, 'isma', 'isma', '2000-01-01', 'F04867', 'Ecuador');
+
+INSERT INTO public.passengers(
+	sequence_number, first_name, last_name, date_of_birth, passport_number, nationality)
+	VALUES (3, 'elias', 'elias', '2000-01-01', 'F04767', 'Cuba');
+
+
+
+
+INSERT INTO public.booking(
+	booking_id, flight_id, price_id)
+	VALUES (1, 1, 100);
+INSERT INTO public.booking(
+	booking_id, flight_id, price_id)
+	VALUES (2, 2, 200);
+INSERT INTO public.booking(
+	booking_id, flight_id, price_id)
+	VALUES (3, 3, 300);
+
+INSERT INTO public.booking_passenger(
+	booking_id, passenger_id)
+	VALUES (1, 1);
+
+INSERT INTO public.booking_passenger(
+	booking_id, passenger_id)
+	VALUES (2, 2);
+
+INSERT INTO public.booking_passenger(
+	booking_id, passenger_id)
+	VALUES (3, 3);
+
