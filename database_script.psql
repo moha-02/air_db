@@ -159,4 +159,9 @@ ALTER TABLE IF EXISTS public.tripulation
     ON UPDATE NO ACTION
     ON DELETE CASCADE;
 
+CREATE INDEX passengers_last_name_idx ON passengers (last_name);
+CREATE INDEX flight_departure_time_idx ON flight (departure_time);
+CREATE INDEX planes_capacidad_idx ON planes (capacidad);
+CREATE INDEX tripulation_surname_idx ON tripulation (surname);
+CREATE INDEX personal_email_idx ON personal (email);
 END;
