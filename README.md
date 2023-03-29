@@ -126,7 +126,7 @@ To sum up its a small example of an airline database, which we used to practice 
 
 Mohammed Salhi Biade
 
-Fbian Ossai Ossai
+Fabian Ossai Ossai
 
 07_09_ASSI_Intermediate_SQL_2
 
